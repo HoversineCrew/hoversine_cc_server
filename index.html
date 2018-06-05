@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta http-equiv="refresh" content="0.5">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>i bims</p>
-<p>@Power</p>
+<html>
+
+<body onload="setInterval(loadDoc, 50)">
+<script>
+function loadDoc() {
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("speeds").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "values.html", true);
+  xhttp.send();
+}
+</script>
+
+<h1>Hoversine Status</h1>
+
+<div id="speeds">a</div>
+
+
 </body>
 </html>

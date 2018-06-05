@@ -29,7 +29,8 @@ class SmallServer(BaseHTTPRequestHandler):
 
         with open(file, 'r') as html_file:
             html = html_file.read()
-            html = html.replace("@Power", str(xbox.output_power))
+            html = html.replace("@Motor1", str(xbox.outputs[0]))
+            html = html.replace("@Motor2", str(xbox.outputs[1]))
 
         if only_filename not in ['favicon.ico', 'myStyle.css']:
             # parameter = parse_qs(urlparse(self.path).query)
