@@ -10,6 +10,10 @@ from urllib.parse import urlparse, parse_qs, urlsplit
 from posixpath import basename
 
 
+# controller global so it is not instanciated multiple times
+xbox = cController.Controller(pollingrate=0.2)
+
+
 class ThreadingSimpleServer(ThreadingMixIn, HTTPServer):
     # ermöglicht multithreading
     pass
@@ -29,17 +33,18 @@ class SmallServer(BaseHTTPRequestHandler):
 
         with open(file, 'r') as html_file:
             html = html_file.read()
-            html = html.replace("@Motor1", str(xbox.outputs[0]))
-            html = html.replace("@Motor2", str(xbox.outputs[1]))
+            html = html.replace("@Motor1", str(xbox.outputs[0]/10))
+            html = html.replace("@Motor2", str(xbox.outputs[1]/10))
 
-        if only_filename not in ['favicon.ico', 'myStyle.css']:
+
+        if only_filename not in ['favicon.ico', 'gauge.css']:
             # parameter = parse_qs(urlparse(self.path).query)
             self.send_response(200)
             self.send_header('Content-type', mimetype)
             self.end_headers()
             self.wfile.write(html.encode())
         else:
-            with open(file, 'r') as html_file:
+            with open(file, 'rb') as html_file:
                 self.send_response(200)
                 self.send_header('Content-type', mimetype)
                 self.end_headers()
@@ -58,6 +63,6 @@ def run(port):
 
 
 if __name__ == '__main__':
-    xbox = cController.Controller(pollingrate=0.2)
+
     run(8081)
 
