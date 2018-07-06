@@ -33,8 +33,8 @@ class SmallServer(BaseHTTPRequestHandler):
 
         with open(file, 'r') as html_file:
             html = html_file.read()
-            html = html.replace("@Motor1", str(xbox.outputs[0]/10))
-            html = html.replace("@Motor2", str(xbox.outputs[1]/10))
+            html = html.replace("@Motor1", str((abs(xbox.outputs[0])/1000)*180))
+            html = html.replace("@Motor2", str(xbox.outputs[1]))
 
 
         if only_filename not in ['favicon.ico', 'gauge.css']:

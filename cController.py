@@ -24,13 +24,13 @@ class Controller(object):
         self._axis_left_right = axis_l_r
         self._axis_power = axis_pow
 
-        self._polling_rate = pollingrate  # how often are new values
+        self._polling_rate = pollingrate  # how often are new values retrieved
 
         self._raw_output = [0.00, 0.00]  # help variable for raw controller values
         self.outputs = [0.00, 0.00]  # Controls for wheel 1 and wheel 2 Ranges from -1000 to 1000
 
-        self.power_modifier = 0.9  # limit the total output 1 = no limit
-        self._precision_multiplier = 1.0  # In precision mode(as long button 0 is pressed) decrease max. speed
+        self.power_modifier = 1  # limit the total output 1 = no limit
+        self._precision_multiplier = 0.8  # In precision mode(as long button 0 is pressed) decrease max. speed
 
         # Start polling and output threads
         self._event_thread = Thread(target=self.event_poll, )

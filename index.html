@@ -1,161 +1,44 @@
 <!DOCTYPE html>
 <html>
-<!-- https://codepen.io/vmodha/pen/oBOjeZ gauge-->
+    <head>
+        <link rel="stylesheet" href="gauge.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
 
+    <body onload="setInterval(loadDoc, 200)">
+        <script>
+        function loadDoc() {
 
-<head>
-<link rel="stylesheet" href="gauge.css">
-<script src="//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js"></script><script src="//static.codepen.io/assets/editor/live/css_live_reload_init-890dc39bb89183d4642d58b1ae5376a0193342f9aed88ea04330dc14c8d52f55.js"></script><meta charset="UTF-8"><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111"><link rel="canonical" href="https://codepen.io/vmodha/pen/oBOjeZ">
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("speeds").innerHTML = this.responseText;
+                var newVal = document.getElementById("lm").innerHTML;
+          $('.gauge--3 .semi-circle--mask').attr({
+                style: '-webkit-transform: rotate(' + newVal + 'deg);' +
+                '-moz-transform: rotate(' + newVal + 'deg);' +
+                'transform: rotate(' + newVal + 'deg);'
+               });
+            }
+          };
 
-<link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script><link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css">
-<style class="cp-pen-styles">.body {
-  font-size: 16;
-}
+          xhttp.open("GET", "values.html", true);
+          xhttp.send();
 
-.header {
-  padding: 1rem;
-  margin: 0 0 2rem 0;
-  background: #f2f2f2;
-}
+        }
+        </script>
 
-h1 {
-  font-size: 2rem;
-  font-family: Arial, sans-serif;
-  text-align: center;
-  text-transform: uppercase;
-}
+    <h1>Hoversine Status</h1>
 
-.content {
-  display: flex;
-}
-
-.mask {
-  position: relative;
-  overflow: hidden;
-  display: block;
-  width: 12.5rem;
-  height: 6.25rem;
-  margin: 1.25rem;
-}
-
-.semi-circle {
-  position: relative;
-  display: block;
-  width: 12.5rem;
-  height: 6.25rem;
-  background: linear-gradient(to right, #c0392b 0%, #f1c40f 50%, #1abc9c 100%);
-  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
-}
-.semi-circle::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  z-index: 2;
-  display: block;
-  width: 8.75rem;
-  height: 4.375rem;
-  margin-left: -4.375rem;
-  background: #fff;
-  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
-}
-
-.semi-circle--mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 12.5rem;
-  height: 12.5rem;
-  background: transparent;
-  transform: rotate(120deg) translate3d(0, 0, 0);
-  transform-origin: center center;
-  backface-visibility: hidden;
-  transition: all .3s ease-in-out;
-}
-.semi-circle--mask::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0%;
-  z-index: 2;
-  display: block;
-  width: 12.625rem;
-  height: 6.375rem;
-  margin: -1px 0 0 -1px;
-  background: #f2f2f2;
-  border-radius: 50% 50% 50% 50%/100% 100% 0% 0%;
-}
-
-.gauge--1 .semi-circle {
-  background: #1abc9c;
-}
-
-.gauge--2 .semi-circle {
-  background: #c0392b;
-}
-.gauge--2 .semi-circle--mask {
-  transform: rotate(20deg) translate3d(0, 0, 0);
-}
-
-.btn--twitter {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  padding: .5rem;
-  background: #3498db;
-  color: #fff;
-}
-</style></head>
-
-<body onload="setInterval(loadDoc, 200)">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-function loadDoc() {
-
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("speeds").innerHTML = this.responseText;
-        var newVal = document.getElementById("lm").innerHTML;
-  $('.gauge--3 .semi-circle--mask').attr({
-        style: '-webkit-transform: rotate(' + newVal + 'deg);' +
-        '-moz-transform: rotate(' + newVal + 'deg);' +
-        'transform: rotate(' + newVal + 'deg);'
-       });
-    }
-  };
-
-  xhttp.open("GET", "values.html", true);
-  xhttp.send();
-
-}
-</script>
-
-<h1>Hoversine Status</h1>
-
-<div id="speeds">a</div>
-<section class="content">
-  <div class="box gauge--1">
-    <div class="mask">
-    	<div class="semi-circle"></div>
-    	<div class="semi-circle--mask"></div>
-    </div>
-  </div>
-
-    <div class="box gauge--2">
-      <div class="mask">
-        <div class="semi-circle"></div>
-        <div class="semi-circle--mask"></div>
-      </div>
-  </div>
-
-      <div class="box gauge--3">
-        <div class="mask">
-          <div class="semi-circle"></div>
-          <div class="semi-circle--mask"></div>
+    <div id="speeds">a</div>
+    <section class="content">
+        <div class="box gauge--3">
+            <div class="mask">
+                <div class="semi-circle"></div>
+                <div class="semi-circle--mask"></div>
+            </div>
         </div>
-      </div>
-</section>
+    </section>
 
-</body>
+    </body>
 </html>
